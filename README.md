@@ -1,6 +1,6 @@
 # Pemicu 4
 
-Judul : Sistem Manajemen Pelayanan Publik dan Administrasi Desa untuk Meningkatkan Efisiensi Layanan Masyarakat
+Judul : Sistem Manajemen Pelayanan Publik dan Administrasi Desa untuk Meningkatkan Efisiensi Layanan Masyarakat  
 Kelompok : E7
 
 | NRP        | Nama                             |
