@@ -1,0 +1,54 @@
+Sistem Manajemen Pelayanan Publik dan Administrasi Desa untuk Meningkatkan Efisiensi Layanan Masyarakat
+
+Desa-desa di Indonesia sering kali menghadapi berbagai masalah dalam pengelolaan
+pelayanan publik dan administrasi, termasuk pengurusan surat keterangan (seperti KTP, KK,
+dan SKTM (Surat Keterangan Tidak Mampu)), pendataan penduduk, pengelolaan anggaran
+desa, serta koordinasi kegiatan pembangunan.
+
+Tantangan utama yang dihadapi perangkat
+desa adalah:
+- Proses pengurusan dokumen yang lambat karena sistem manual berbasis kertas.
+- Sulitnya melacak status pengurusan dokumen yang diajukan oleh warga.
+- Kurangnya transparansi dalam penggunaan dana desa dan pengelolaan anggaran.
+- Kurangnya alat untuk memantau program pembangunan yang sedang berjalan, termasuk penggunaan dana dan kemajuan proyek.
+- Minimnya kemampuan perangkat desa untuk memproses data warga secara cepat untuk berbagai kebutuhan, seperti bantuan sosial atau program pemerintah.
+
+Untuk mengatasi masalah ini, desa tersebut membutuhkan sistem manajemen basis data yang
+dapat mempercepat proses pelayanan publik, memperbaiki transparansi pengelolaan
+anggaran desa, dan mempermudah pemantauan proyek pembangunan.
+
+Sebagai salah satu tim mahasiswa yang melakukan KKN di Desa Medang Kamulan, kalian
+diminta untuk merancang dan mengimplementasikan sistem basis data yang dapat
+memfasilitasi manajemen pelayanan publik dan administrasi di tingkat desa, dengan fungsi
+sebagai berikut:
+
+A. Manajemen Pelayanan Warga: Mengelola permohonan surat keterangan dan dokumen warga seperti KTP, KK, surat keterangan domisili, surat pengantar, dan dokumen administrasi lainnya.
+B. Manajemen Pendataan Penduduk: Memfasilitasi pendataan warga, termasuk data keluarga, data pendidikan, pekerjaan, dan status ekonomi untuk mendukung pengambilan keputusan.
+C. Manajemen Anggaran Desa: Mengelola perencanaan, alokasi, dan laporan penggunaan dana desa, serta memantau transparansi anggaran.
+D. Manajemen Program Pembangunan Desa: Melacak kemajuan proyek pembangunan desa, termasuk anggaran, tenggat waktu, dan pelaporan kemajuan secara real-time.
+E. Pengaduan Masyarakat: Mengelola keluhan dan saran dari warga mengenai pelayanan publik dan pembangunan desa.
+
+Koordinator KKN menugaskan tim kalian untuk menyelesaikan pekerjaan berikut agar basis
+data yang dibuat berkualitas baik dan siap digunakan di Desa Medang Kamulan.
+
+Pekerjaan 1: Membuat CDM dan PDM yang mengakomodasi tiga dari total lima manajemen pelayanan publik dan administrasi (poin A s.d. E).
+Pekerjaan 2: Buat DDL dan mengisikan data dummy minimal 200 ribu data per tabel.
+Pekerjaan 3: Mengembangkan tiga query (menerapkan indexing dan optimasi query) untuk menghasilkan laporan seperti daftar pengajuan surat keterangan yang sedang diproses, laporan anggaran desa per program, dan status proyek Pembangunan (sesuai dengan dua Poin yang dipilih).
+Pekerjaan 4: Mengembangkan sebuah trigger untuk menangani manajemen pelayanan publik dan administrasi yang dipilih.
+Pekerjaan 5: Mengembangkan sebuah function untuk menangani manajemen pelayanan publik dan administrasi yang dipilih.
+Pekerjaan 6: Mengembangkan sebuah procedure untuk menangani manajemen pelayanan publik dan administrasi yang dipilih.
+Pekerjaan 7: Mengembangkan sebuah database transaction untuk menangani manajemen pelayanan publik dan administrasi yang dipilih
+
+Laporan
+Buat file Word berisi:
+- Deskripsi Topik yang diambil
+- Daftar business rule
+- Daftar DB transaction
+- Desain database (gambar CDM PDM)
+- Jumlah data yang diinsert per tabel
+- Skenario dari data yang diinput: satu record lengkap, ada kolom NULL
+- Untuk menjawab pekerjaan 1-7: tuliskan pembagian tugas per mahasiswa.
+- Untuk menjawab pekerjaan 1-7: tuliskan:
+    - deskripsi objek (trigger, function, procedure) dan database transaction,
+    - sintaks,
+    - screenshot hasil

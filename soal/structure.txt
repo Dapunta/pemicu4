@@ -1,0 +1,126 @@
+warga
+| Kolom                      | Tipe Data     | Keterangan                         |
+| -------------------------- | ------------- | ---------------------------------- |
+| `nik`                      | VARCHAR(16)   | PK                                 |
+| `nama`                     | VARCHAR(100)  |                                    |
+| `jenis_kelamin`            | CHAR(1)       | 'L' / 'P'                          |
+| `agama`                    | VARCHAR(20)   |                                    |
+| `tempat_lahir`             | VARCHAR(50)   |                                    |
+| `tanggal_lahir`            | DATE          |                                    |
+| `alamat`                   | TEXT          |                                    |
+| `status_keluarga`          | VARCHAR(20)   | 'Anak', 'Kepala Keluarga', dll     |
+| `status_perkawinan`        | VARCHAR(20)   | 'Kawin', 'Belum Kawin', dll        |
+| `keluarga_no_kk`           | VARCHAR(16)   | FK (keluarga.no_kk)                |
+| `pekerjaan_id_pekerjaan`   | VARCHAR(16)   | FK (pekerjaan.id_pekerjaan) NULL   |
+| `pendidikan_id_pendidikan` | VARCHAR(16)   | FK (pendidikan.id_pendidikan) NULL |
+
+keluarga
+| Kolom    | Tipe Data   | Keterangan |
+| -------- | ----------- | ---------- |
+| `no_kk`  | VARCHAR(16) | PK         |
+| `alamat` | TEXT        |            |
+| `rt`     | INT         |            |
+| `rw`     | INT         |            |
+
+pekerjaan
+| Kolom            | Tipe Data   | Keterangan            |
+| ---------------- | ----------- | --------------------- |
+| `id_pekerjaan`   | VARCHAR(16) | PK                    |
+| `nama`           | VARCHAR(50) | 'Petani', 'Guru', dll |
+| `gaji_per_bulan` | INT         | NULL                  |
+
+pendidikan
+| Kolom           | Tipe Data   | Keterangan                    |
+| --------------- | ----------- | ----------------------------- |
+| `id_pendidikan` | VARCHAR(16) | PK                            |
+| `nama`          | VARCHAR(50) | 'SD', 'SMP', 'SMA', 'D3', dll |
+
+staff
+| Kolom       | Tipe Data   | Keterangan                                          |
+| ----------- | ----------- | --------------------------------------------------- |
+| `id_staff`  | VARCHAR(16) | PK                                                  |
+| `jabatan`   | VARCHAR(50) | 'Sekdes', 'Operator', dll                           |
+| `username`  | VARCHAR(50) | Username login UNIQUE                               |
+| `password`  | TEXT        | Password login (dihash, bukan plaintext)            |
+| `warga_nik` | VARCHAR(16) | FK (warga.nik)                                      |
+
+permohonan_surat
+| Kolom                            | Tipe Data   | Keterangan                                                         |
+| -------------------------------- | ----------- | ------------------------------------------------------------------ |
+| `id_permohonan`                  | VARCHAR(16) | PK                                                                 |
+| `tanggal_pengajuan`              | DATE        |                                                                    |
+| `status`                         | VARCHAR(20) | 'Menunggu' / 'Diproses' / 'Selesai' / 'Ditolak' Default='Menunggu' |
+| `keterangan`                     | TEXT        | NULL                                                               |
+| `warga_nik`                      | VARCHAR(16) | FK (warga.nik)                                                     |
+| `staff_id_staff`                 | VARCHAR(16) | FK (staff.id_staff)                                                |
+| `jenis_surat_id_jenis`           | VARCHAR(16) | FK (jenis_surat.id_jenis)                                          |
+| `dokumen_persyaratan_id_dokumen` | VARCHAR(16) | FK (dokumen_persyaratan.id_dokumen) NULL                           |
+
+jenis_surat
+| Kolom        | Tipe Data   | Keterangan                    |
+| ------------ | ----------- | ----------------------------- |
+| `id_jenis`   | VARCHAR(16) | PK                            |
+| `nama_surat` | VARCHAR(50) | 'Surat Domisili', 'SKTM', dll |
+
+dokumen_persyaratan
+| Kolom           | Tipe Data    | Keterangan             |
+| --------------- | ------------ | ---------------------- |
+| `id_dokumen`    | VARCHAR(16)  | PK                     |
+| `jenis_dokumen` | VARCHAR(50)  | 'KK', 'KTP', dll       |
+| `url_file`      | TEXT         |                        |
+
+respon_permohonan
+| Kolom                            | Tipe Data   | Keterangan                          |
+| -------------------------------- | ----------- | ----------------------------------- |
+| `id_respon`                      | VARCHAR(16) | PK                                  |
+| `tanggal_respon`                 | DATE        |                                     |
+| `status`                         | VARCHAR(20) | 'Diproses' / 'Selesai' / 'Ditolak'  |
+| `catatan`                        | TEXT        |                                     |
+| `permohonan_surat_id_permohonan` | VARCHAR(16) | FK (permohonan_surat.id_permohonan) |
+| `staff_id_staff`                 | VARCHAR(16) | FK (staff.id_staff)                 |
+| `surat_id_surat`                 | VARCHAR(16) | FK (surat.id_surat) NULL            |
+
+surat
+| Kolom            | Tipe Data   | Keterangan          |
+| -----------------| ----------- | --------------------|
+| `id_surat`       | VARCHAR(16) | PK                  |
+| `nomor_surat`    | VARCHAR(50) |                     |
+| `tanggal_cetak`  | DATE        |                     |
+| `url_file`       | TEXT        |                     |
+
+pengaduan
+| Kolom               | Tipe Data   | Keterangan                                          |
+| ------------------- | ----------- | --------------------------------------------------- |
+| `id_pengaduan`      | VARCHAR(16) | PK                                                  |
+| `tanggal_pengaduan` | DATE        |                                                     |
+| `kategori`          | VARCHAR(50) | 'Infrastruktur', 'Pelayanan', 'Keamanan', 'Lainnya' |
+| `isi_pengaduan`     | TEXT        |                                                     |
+| `status`            | VARCHAR(20) | 'Diterima', 'Diproses', 'Selesai'                   |
+| `warga_nik`         | VARCHAR(16) | FK (warga.nik)                                      |
+
+tanggapan_pengaduan
+| Kolom                    | Tipe Data   | Keterangan                  |
+| ------------------------ | ----------- | --------------------------- |
+| `id_tanggapan`           | VARCHAR(16) | PK                          |
+| `tanggal_tanggapan`      | DATE        |                             |
+| `isi_tanggapan`          | TEXT        |                             |
+| `pengaduan_id_pengaduan` | VARCHAR(16) | FK (pengaduan.id_pengaduan) |
+| `staff_id_staff`         | VARCHAR(16) | FK (staff.id_staff)         |
+
+relasi
+| Relasi (dari → ke)                       | Kardinalitas | Kemunculan | Penjelasan (logis)                                                                          |
+| ---------------------------------------- | ------------ | ---------- | ------------------------------------------------------------------------------------------- |
+| keluarga → warga                         | One-to-Many  | 1-N        | Satu keluarga memiliki banyak warga, setiap warga wajib masuk dalam satu keluarga           |
+| pekerjaan → warga                        | One-to-Many  | 1-0        | Satu pekerjaan bisa dimiliki banyak warga, tapi warga boleh tidak punya pekerjaan           |
+| pendidikan → warga                       | One-to-Many  | 1-0        | Satu tingkat pendidikan bisa dimiliki banyak warga, tapi warga boleh tidak punya pendidikan |
+| warga → staff                            | One-to-One   | 1-0        | Satu warga bisa menjadi satu staff, tapi tidak semua warga adalah staff                     |
+| warga → permohonan_surat                 | One-to-Many  | 1-N        | Warga bisa membuat banyak permohonan, dan permohonan wajib terkait warga                    |
+| staff → permohonan_surat                 | One-to-Many  | 1-N        | Satu staff menerima banyak permohonan, permohonan wajib diterima oleh seorang staff         |
+| jenis_surat → permohonan_surat           | One-to-Many  | 1-N        | Satu jenis surat dipakai banyak permohonan, dan setiap permohonan wajib punya jenis         |
+| permohonan_surat → dokumen_persyaratan   | One-to-Many  | 1-0        | Dokumen bisa berdiri sendiri, dan permohonan bisa tidak memiliki dokumen                    |
+| permohonan_surat → respon_permohonan     | One-to-One   | 1-0        | Satu permohonan bisa memiliki respon, bisa juga belum direspon                              |
+| staff → respon_permohonan                | One-to-Many  | 1-N        | Satu staff bisa memberikan banyak respon, setiap respon wajib dari staff                    |
+| surat → respon_permohonan                | One-to-One   | 1-0        | Satu surat hanya untuk satu respon, tapi tidak semua respon menghasilkan surat              |
+| warga → pengaduan                        | One-to-Many  | 1-N        | Satu warga bisa membuat banyak pengaduan, dan setiap pengaduan wajib dari warga             |
+| pengaduan → tanggapan_pengaduan          | One-to-Many  | 1-0        | Satu pengaduan bisa punya banyak tanggapan, tapi boleh juga belum ditanggapi                |
+| staff → tanggapan_pengaduan              | One-to-Many  | 1-N        | Satu staff bisa beri banyak tanggapan, dan setiap tanggapan harus dari staff                |
