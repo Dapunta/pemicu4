@@ -1,11 +1,4 @@
--- Table: dokumen_persyaratan
-CREATE TABLE dokumen_persyaratan (
-    id_dokumen varchar(16)  NOT NULL,
-    jenis_dokumen varchar(50)  NOT NULL,
-    url_file text  NOT NULL,
-    permohonan_surat_id_permohonan varchar(16)  NOT NULL,
-    CONSTRAINT dokumen_persyaratan_pk PRIMARY KEY (id_dokumen)
-);
+-- Independent
 
 -- Table: jenis_surat
 CREATE TABLE jenis_surat (
@@ -26,7 +19,7 @@ CREATE TABLE keluarga (
 -- Table: pekerjaan
 CREATE TABLE pekerjaan (
     id_pekerjaan varchar(16)  NOT NULL,
-    nama varchar(50)  NOT NULL,
+    nama varchar(100)  NOT NULL,
     gaji_per_bulan int  NULL,
     CONSTRAINT pekerjaan_pk PRIMARY KEY (id_pekerjaan)
 );
@@ -38,72 +31,10 @@ CREATE TABLE pendidikan (
     CONSTRAINT pendidikan_pk PRIMARY KEY (id_pendidikan)
 );
 
--- Table: pengaduan
-CREATE TABLE pengaduan (
-    id_pengaduan varchar(16)  NOT NULL,
-    tanggal_pengaduan date  NOT NULL,
-    kategori varchar(50)  NOT NULL,
-    isi_pengaduan text  NOT NULL,
-    status varchar(20)  NOT NULL,
-    warga_nik varchar(16)  NOT NULL,
-    CONSTRAINT pengaduan_pk PRIMARY KEY (id_pengaduan)
-);
-
--- Table: permohonan_surat
-CREATE TABLE permohonan_surat (
-    id_permohonan varchar(16)  NOT NULL,
-    tanggal_pengajuan date  NOT NULL,
-    status varchar(20)  NOT NULL DEFAULT 'menunggu',
-    keterangan text  NULL,
-    warga_nik varchar(16)  NOT NULL,
-    staff_id_staff varchar(16)  NOT NULL,
-    jenis_surat_id_jenis varchar(16)  NOT NULL,
-    CONSTRAINT permohonan_surat_pk PRIMARY KEY (id_permohonan)
-);
-
--- Table: respon_permohonan
-CREATE TABLE respon_permohonan (
-    id_respon varchar(16)  NOT NULL,
-    tanggal_respon date  NOT NULL,
-    status varchar(20)  NOT NULL,
-    catatan text  NOT NULL,
-    permohonan_surat_id_permohonan varchar(16)  NOT NULL,
-    staff_id_staff varchar(16)  NOT NULL,
-    CONSTRAINT respon_permohonan_pk PRIMARY KEY (id_respon)
-);
-
--- Table: staff
-CREATE TABLE staff (
-    id_staff varchar(16)  NOT NULL,
-    jabatan varchar(50)  NOT NULL,
-    username varchar(50)  NOT NULL,
-    password text  NOT NULL,
-    warga_nik varchar(16)  NOT NULL,
-    CONSTRAINT AK_0 UNIQUE (username) NOT DEFERRABLE INITIALLY IMMEDIATE,
-    CONSTRAINT staff_pk PRIMARY KEY (id_staff)
-);
-
--- Table: surat
-CREATE TABLE surat (
-    id_surat varchar(16)  NOT NULL,
-    nomor_surat varchar(50)  NOT NULL,
-    tanggal_cetak date  NOT NULL,
-    url_file text  NOT NULL,
-    respon_permohonan_id_respon varchar(16)  NOT NULL,
-    CONSTRAINT surat_pk PRIMARY KEY (id_surat)
-);
-
--- Table: tanggapan_pengaduan
-CREATE TABLE tanggapan_pengaduan (
-    id_tanggapan varchar(16)  NOT NULL,
-    tanggal_tanggapan date  NOT NULL,
-    isi_tanggapan text  NOT NULL,
-    pengaduan_id_pengaduan varchar(16)  NOT NULL,
-    staff_id_staff varchar(16)  NOT NULL,
-    CONSTRAINT tanggapan_pengaduan_pk PRIMARY KEY (id_tanggapan)
-);
+-- Not Independent
 
 -- Table: warga
+-- Requirement : keluarga, pekerjaan, pendidikan
 CREATE TABLE warga (
     nik varchar(16)  NOT NULL,
     nama varchar(100)  NOT NULL,
@@ -118,6 +49,87 @@ CREATE TABLE warga (
     pekerjaan_id_pekerjaan varchar(16)  NULL,
     pendidikan_id_pendidikan varchar(16)  NULL,
     CONSTRAINT warga_pk PRIMARY KEY (nik)
+);
+
+-- Table: staff
+-- Requirement : warga
+CREATE TABLE staff (
+    id_staff varchar(16)  NOT NULL,
+    jabatan varchar(50)  NOT NULL,
+    username varchar(50)  NOT NULL,
+    password text  NOT NULL,
+    warga_nik varchar(16)  NOT NULL,
+    CONSTRAINT AK_0 UNIQUE (username) NOT DEFERRABLE INITIALLY IMMEDIATE,
+    CONSTRAINT staff_pk PRIMARY KEY (id_staff)
+);
+
+-- Table: pengaduan
+-- Requirement : warga
+CREATE TABLE pengaduan (
+    id_pengaduan varchar(16)  NOT NULL,
+    tanggal_pengaduan date  NOT NULL,
+    kategori varchar(50)  NOT NULL,
+    isi_pengaduan text  NOT NULL,
+    status varchar(20)  NOT NULL DEFAULT 'menunggu',
+    warga_nik varchar(16)  NOT NULL,
+    CONSTRAINT pengaduan_pk PRIMARY KEY (id_pengaduan)
+);
+
+-- Table: tanggapan_pengaduan
+-- Requirement : pengaduan, staff
+CREATE TABLE tanggapan_pengaduan (
+    id_tanggapan varchar(16)  NOT NULL,
+    tanggal_tanggapan date  NOT NULL,
+    isi_tanggapan text  NOT NULL,
+    pengaduan_id_pengaduan varchar(16)  NOT NULL,
+    staff_id_staff varchar(16)  NOT NULL,
+    CONSTRAINT tanggapan_pengaduan_pk PRIMARY KEY (id_tanggapan)
+);
+
+-- Table: permohonan_surat
+-- Requirement : warga, staff, jenis_surat
+CREATE TABLE permohonan_surat (
+    id_permohonan varchar(16)  NOT NULL,
+    tanggal_pengajuan date  NOT NULL,
+    status varchar(20)  NOT NULL DEFAULT 'menunggu',
+    keterangan text  NULL,
+    warga_nik varchar(16)  NOT NULL,
+    staff_id_staff varchar(16)  NOT NULL,
+    jenis_surat_id_jenis varchar(16)  NOT NULL,
+    CONSTRAINT permohonan_surat_pk PRIMARY KEY (id_permohonan)
+);
+
+-- Table: dokumen_persyaratan
+-- Requirement : permohonan_surat
+CREATE TABLE dokumen_persyaratan (
+    id_dokumen varchar(16)  NOT NULL,
+    jenis_dokumen varchar(50)  NOT NULL,
+    url_file text  NOT NULL,
+    permohonan_surat_id_permohonan varchar(16)  NOT NULL,
+    CONSTRAINT dokumen_persyaratan_pk PRIMARY KEY (id_dokumen)
+);
+
+-- Table: respon_permohonan
+-- Requirement : permohonan_surat, staff
+CREATE TABLE respon_permohonan (
+    id_respon varchar(16)  NOT NULL,
+    tanggal_respon date  NOT NULL,
+    status varchar(20)  NOT NULL,
+    catatan text  NOT NULL,
+    permohonan_surat_id_permohonan varchar(16)  NOT NULL,
+    staff_id_staff varchar(16)  NOT NULL,
+    CONSTRAINT respon_permohonan_pk PRIMARY KEY (id_respon)
+);
+
+-- Table: surat
+-- Requirement : respon_permohonan
+CREATE TABLE surat (
+    id_surat varchar(16)  NOT NULL,
+    nomor_surat varchar(50)  NOT NULL,
+    tanggal_cetak date  NOT NULL,
+    url_file text  NOT NULL,
+    respon_permohonan_id_respon varchar(16)  NOT NULL,
+    CONSTRAINT surat_pk PRIMARY KEY (id_surat)
 );
 
 -- foreign keys

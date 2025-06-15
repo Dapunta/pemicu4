@@ -30,17 +30,47 @@ Kelompok : E7
 
 ### Pekerjaan 1
 
-[Query Create Table](/sql/create_table.sql)
-
 | CDM                     | PDM                     |
 | ----------------------- | ----------------------- |
 | ![cdm](/assets/cdm.png) | ![pdm](/assets/pdm.png) |
 
+### Pekerjaan 2
 
+**Data Definition Language**
+- [Query Create Table](/sql/create_table.sql)
+- [Query Drop Table](/sql/drop_table.sql)
 
+**Generator**
+- Generator : [generate_data.py](/python/generate_data.py)
+- Convert `.txt` to `.sql` : [convert_txt_to_sql.py](/python/convert_txt_to_sql.py)
 
+**Data Dummy**
+- Query Create & Insert : [create_insert.zip](https://drive.google.com/file/d/1EmcPnNvNC6ExKUNF1RoNU18jqORm4JIP/view?usp=sharing)
 
+**Cara Insert**
+- Default
+    ```sh
+    psql -U [nama_user] -d [nama_database] -f [nama_file.sql]
+    ```
+- Contoh
+    ```sh
+    psql -U postgres -d desa -f insert_warga.sql
+    ```
 
-
+**Hasil Insert**  
+| Table               | Jumlah Data | Screenshot |
+| ------------------- | ----------- | ---------- |
+| jenis_surat         | 200000 | ![](/assets/pekerjaan2/insert_jenis_surat.png) |
+| keluarga            | 200000 | ![](/assets/pekerjaan2/insert_keluarga.png) |
+| pekerjaan           | 200000 | ![](/assets/pekerjaan2/insert_pekerjaan.png) |
+| pendidikan          | 10 | ![](/assets/pekerjaan2/insert_pendidikan.png) |
+| warga               | 400000 | ![](/assets/pekerjaan2/insert_warga.png) |
+| staff               | 25 | ![](/assets/pekerjaan2/insert_staff.png) |
+| pengaduan           | 500000 | ![](/assets/pekerjaan2/insert_pengaduan.png) |
+| tanggapan_pengaduan | 333615 | ![](/assets/pekerjaan2/insert_tanggapan_pengaduan.png) |
+| permohonan_surat    | 600000 | ![](/assets/pekerjaan2/insert_permohonan_surat.png) |
+| dokumen_persyaratan | 449863 | ![](/assets/pekerjaan2/insert_dokumen_persyaratan.png) |
+| respon_permohonan   | 450309 | ![](/assets/pekerjaan2/insert_respon_permohonan.png) |
+| surat               | 149605 | ![](/assets/pekerjaan2/insert_surat.png) |
 
 
