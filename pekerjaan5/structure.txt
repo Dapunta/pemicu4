@@ -1,0 +1,55 @@
+A. Manajemen Pelayanan Warga (permohonan surat & dokumen)
+1. distribusi_status_permohonan()
+    Menghitung jumlah permohonan surat berdasarkan status (menunggu, diproses, selesai, ditolak) dalam periode tertentu
+2. permohonan_berdasar_status()
+    Menampilkan permohonan surat pada periode tertentu berdasarkan statusnya
+3. kelompokkan_permohonan_serupa()
+    Mengelompokkan permohonan yang jenis dokumennya mirip, biasa digunakan untuk dashboard admin
+4. riwayat_permohonan_warga()
+    Menampilkan semua permohonan surat oleh warga tertentu
+5. detail_permohonan()
+    Menampilkan detail permohonan
+6. daftar_surat_dicetak(start_date DATE, end_date DATE)
+    Menampilkan daftar semua surat yang telah dicetak dalam periode tertentu, lengkap dengan data pemohon, jenis surat, dan staff pencetak
+7. permohonan_tidak_lengkap()
+    Menampilkan permohonan pada periode tertentu yang tidak memiliki dokumen persyaratan
+
+B. Manajemen Pendataan Penduduk (warga, keluarga, pekerjaan, pendidikan)
+1. rekap_pendidikan_warga()
+    Menampilkan persebaran pendidikan warga
+2. analisis_kepadatan_keluarga()
+    Menampilkan daftar keluarga dengan jumlah anggotanya
+3. lihat_anggota_keluarga()
+    Menampilkan informasi seluruh anggota suatu keluarga
+4. sebaran_penghasilan()
+    Menampilkan persebaran penghasilan (warga/keluarga)
+5. daftar_warga_berdasar_penghasilan()
+    Menampilkan daftar warga berdasar range penghasilan tertentu
+6. daftar_keluarga_berdasar_penghasilan()
+    Menampilkan daftar keluarga berdasar range penghasilan tertentu
+
+E. Pengaduan Masyarakat
+1. distribusi_status_pengaduan()
+    Menghitung jumlah pengaduan berdasarkan status (menunggu, diproses, selesai) dalam periode tertentu
+2. pengaduan_berdasar_status()
+    Menampilkan pengaduan pada periode tertentu berdasarkan statusnya
+3. distribusi_pengaduan_per_kategori()
+    Menghitung jumlah pengaduan berdasar kategori pada periode tertentu
+4. riwayat_pengaduan_warga()
+    Menampilkan semua pengaduan oleh warga tertentu
+5. detail_pengaduan()
+    Menampilkan detail pengaduan
+
+Bonus
+1. evaluasi_kinerja_staff(start_date DATE, end_date DATE)
+Menampilkan kinerja semua staff dalam periode tertentu,
+berupa:
+- jumlah permohonan surat yang ditangani
+- jumlah respon terhadap permohonan
+- jumlah tanggapan pengaduan
+- jumlah surat yang berhasil dicetak
+- urutkan dari staff paling produktif ke paling rendah
+logika:
+- Gabungkan 3 sumber: permohonan_surat, respon_permohonan, tanggapan_pengaduan, surat
+- Group by staff.id_staff, gunakan JOIN dan FILTER by tanggal
+- Gunakan COALESCE dan COUNT(DISTINCT ...) untuk agregasi bersih
